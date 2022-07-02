@@ -1,9 +1,7 @@
 import os
 import dotenv
+import models
 
-
-if __name__ == '__main__':
-    if dotenv.load_dotenv():
-
-        for key in os.environ.keys():
-            print(f"{key} == {os.environ[key]}")
+if dotenv.load_dotenv():
+    if __name__ == '__main__':
+        print(models.Track())
