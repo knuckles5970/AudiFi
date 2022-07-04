@@ -2,10 +2,10 @@
     """
 import os
 import peewee
+import config
 
 
-def get_app_database() -> peewee.SqliteDatabase:
-    return peewee.SqliteDatabase(os.getenv('AUDIFI_DBNAME'))
+db = peewee.SqliteDatabase(config.DBNAME)
 
 
 class __BaseModel(peewee.Model):
@@ -15,7 +15,7 @@ class __BaseModel(peewee.Model):
     Should not create instances directly.
     """
     class Meta:
-        database = get_app_database()
+        database = db
 
 
 class Track(__BaseModel):
@@ -28,3 +28,7 @@ class Track(__BaseModel):
 
     class Meta:
         table_name = 'tracks'
+
+
+with db:
+    db.create_tables([Track])
